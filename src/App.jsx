@@ -1,12 +1,11 @@
 import './App.sass';
 import 'leaflet/dist/leaflet.css';
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { parse } from 'node-html-parser';
 import { XMLParser } from 'fast-xml-parser';
 import { Table } from 'react-bootstrap';
 import { Marker, Popup, TileLayer, MapContainer } from 'react-leaflet';
-
 import locations_countries from './locations0.json';
 import locations_cities from './locations1.json';
 
@@ -26,7 +25,7 @@ function Map({ jobsPositions }) {
         jobsPositions.map((e, idx) => (
           <Marker position={[e.position[0] + Math.random(), e.position[1] + Math.random()]} key={idx}>
             <Popup>
-              <a href={e.link} target="_blank">
+              <a href={e.link} target="_blank" rel="noreferrer">
                 {e.title}
               </a>
             </Popup>
@@ -66,7 +65,7 @@ function App() {
       .then(res => {
         const markers = [];
         const data = parser.parse(res.data)['rss']['channel']['item'];
-        data.map((e, idx) => {
+        data.map((e) => {
           const location_city = extract_location(e.description);
           const location_center = extract_center(location_city);
           markers.push({
@@ -113,7 +112,7 @@ function App() {
                 <tr key={idx}>
                   <td>{idx + 1}</td>
                   <td>
-                    <a href={e.link} target="_blank">
+                    <a href={e.link} target="_blank" rel="noreferrer">
                       {e.title}
                     </a>
                   </td>
