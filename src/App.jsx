@@ -1,26 +1,16 @@
 import './App.sass';
+import 'leaflet/dist/leaflet.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { parse } from 'node-html-parser';
 import { XMLParser } from 'fast-xml-parser';
 import { Table } from 'react-bootstrap';
 import { Marker, Popup, TileLayer, MapContainer } from 'react-leaflet';
+
 import locations_countries from './locations0.json';
 import locations_cities from './locations1.json';
-import L from 'leaflet'
-import marker_icon_2x from 'leaflet/dist/images/marker-icon-2x.png'
-import marker_icon from 'leaflet/dist/images/marker-icon.png'
-import marker_shadow from 'leaflet/dist/images/marker-shadow.png'
-import 'leaflet/dist/leaflet.css';
 
 const parser = new XMLParser();
-
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: marker_icon_2x,
-  iconUrl: marker_icon,
-  shadowUrl: marker_shadow
-});
 
 function Map({ jobsPositions }) {
 
